@@ -36,7 +36,14 @@ module.exports = [
       },
    },
 
-  'strapi::cors',
+   {
+    name: 'strapi::cors',
+    config: {
+      enabled: true,
+      headers: '*',
+      origin: ['http://localhost:8080', 'https://digital-ecommerce-bice.vercel.app', '*']
+    }
+  },
   'strapi::poweredBy',
   'strapi::query',
   'strapi::body',
