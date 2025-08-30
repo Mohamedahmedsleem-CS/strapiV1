@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "quantity_options",
+  "info": {
+    "singularName": "quantity-option",
+    "pluralName": "quantity-options",
+    "displayName": "Quantity Option"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "value": {
+      "type": "decimal",
+      "required": true
+    },
+    "price_modifier": {
+      "type": "decimal"
+    },
+    "unit": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::unit.unit"
+    }
+  }
+}

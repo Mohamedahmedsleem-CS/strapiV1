@@ -1,0 +1,103 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "banner": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "price": {
+      "type": "decimal"
+    },
+    "instantDelivery": {
+      "type": "boolean"
+    },
+    "files": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "whatsIncluded": {
+      "type": "text"
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "men",
+        "women",
+        "children",
+        "تمور",
+        "بن",
+        "عطارة",
+        "اعشاب",
+        "زيوت",
+        "مكسرات"
+      ]
+    },
+    "isWeighed": {
+      "type": "boolean"
+    },
+    "unit": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::unit.unit"
+    },
+    "quantity_options": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::quantity-option.quantity-option"
+    },
+    "originalPrice": {
+      "type": "decimal"
+    },
+    "isBestSeller": {
+      "type": "boolean",
+      "default": false
+    },
+    "benefits": {
+      "type": "blocks"
+    },
+    "usageMethods": {
+      "type": "blocks"
+    },
+    "warnings": {
+      "type": "blocks"
+    },
+    "reviewImages": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}
