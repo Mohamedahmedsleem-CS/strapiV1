@@ -448,6 +448,8 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         '\u0628\u062E\u0648\u0631  \u0648 \u0639\u0648\u062F',
         '\u0639\u0637\u0648\u0631',
         '\u0643\u0631\u064A\u0645\u0627\u062A \u0648\u0634\u0627\u0645\u0628\u0648',
+        '\u0639\u0631\u0648\u0636 \u0648\u062A\u062E\u0641\u064A\u0636\u0627\u062A',
+        '\u0645\u062C\u0645\u0648\u0639\u0627\u062A',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -510,6 +512,7 @@ export interface ApiQuantityOptionQuantityOption
       'api::quantity-option.quantity-option'
     > &
       Schema.Attribute.Private;
+    name: Schema.Attribute.String;
     price_modifier: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     unit: Schema.Attribute.Relation<'oneToOne', 'api::unit.unit'>;
