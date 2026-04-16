@@ -410,6 +410,45 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
+  collectionName: 'categories';
+  info: {
+    displayName: 'Category ';
+    pluralName: 'categories';
+    singularName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::category.category'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String &
+      Schema.Attribute.Required &
+      Schema.Attribute.Unique;
+    order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    showInHome: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    showInNavbar: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -426,32 +465,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       true
     >;
     benefits: Schema.Attribute.Blocks;
-    category: Schema.Attribute.Enumeration<
-      [
-        '\u0627\u0644\u0628\u0647\u0627\u0631\u0627\u062A \u0648\u0627\u0644\u062A\u0648\u0627\u0628\u0644',
-        '\u0627\u0644\u0623\u0639\u0634\u0627\u0628 \u0627\u0644\u0637\u0628\u064A\u0629',
-        '\u0627\u0644\u0628\u0646 \u0648\u0627\u0644\u0642\u0647\u0648\u0629',
-        '\u0627\u0644\u0645\u0643\u0633\u0631\u0627\u062A \u0648\u0627\u0644\u0641\u0648\u0627\u0643\u0647 \u0627\u0644\u0645\u062C\u0641\u0641\u0629',
-        '\u0627\u0644\u062D\u0628\u0648\u0628 \u0648\u0627\u0644\u0628\u0642\u0648\u0644\u064A\u0627\u062A',
-        '\u0627\u0644\u0632\u064A\u0648\u062A \u0627\u0644\u0637\u0628\u064A\u0639\u064A\u0629',
-        '\u0627\u0644\u0639\u0633\u0644 \u0648\u0645\u0646\u062A\u062C\u0627\u062A \u0627\u0644\u0646\u062D\u0644',
-        '\u0627\u0644\u062A\u0645\u0648\u0631 \u0648\u0627\u0644\u0639\u062C\u0648\u0629',
-        '\u0627\u0644\u0645\u0634\u0631\u0648\u0628\u0627\u062A \u0648\u0627\u0644\u0634\u0627\u064A',
-        '\u0627\u0644\u062A\u0648\u0627\u0628\u0644 \u0627\u0644\u062D\u0627\u0631\u0629 \u0648\u0627\u0644\u0635\u0644\u0635\u0627\u062A',
-        '\u0627\u0644\u062E\u0644\u0637\u0627\u062A \u0627\u0644\u062C\u0627\u0647\u0632\u0629',
-        '\u0645\u0646\u062A\u062C\u0627\u062A \u0627\u0644\u0639\u0646\u0627\u064A\u0629 \u0627\u0644\u0634\u062E\u0635\u064A\u0629 \u0627\u0644\u0637\u0628\u064A\u0639\u064A\u0629',
-        '\u0645\u0633\u062A\u0644\u0632\u0645\u0627\u062A \u062A\u062D\u0636\u064A\u0631 \u0627\u0644\u0623\u0639\u0634\u0627\u0628',
-        '\u0645\u0646\u062A\u062C\u0627\u062A \u0645\u0648\u0633\u0645\u064A\u0629',
-        '\u0647\u062F\u0627\u064A\u0627 \u0648\u0639\u0628\u0648\u0627\u062A \u0645\u0645\u064A\u0632\u0629',
-        '\u0645\u0646\u062A\u062C\u0627\u062A \u0637\u0628\u064A\u0629 \u062A\u0643\u0645\u064A\u0644\u064A\u0629',
-        '\u0645\u0648\u0627\u062F \u062E\u0627\u0645 \u0644\u0644\u0637\u0647\u064A \u0648\u0627\u0644\u062D\u0644\u0648\u064A\u0627\u062A',
-        '\u0628\u062E\u0648\u0631  \u0648 \u0639\u0648\u062F',
-        '\u0639\u0637\u0648\u0631',
-        '\u0643\u0631\u064A\u0645\u0627\u062A \u0648\u0634\u0627\u0645\u0628\u0648',
-        '\u0639\u0631\u0648\u0636 \u0648\u062A\u062E\u0641\u064A\u0636\u0627\u062A',
-        '\u0645\u062C\u0645\u0648\u0639\u0627\u062A',
-      ]
-    >;
+    category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1061,6 +1075,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::category.category': ApiCategoryCategory;
       'api::product.product': ApiProductProduct;
       'api::quantity-option.quantity-option': ApiQuantityOptionQuantityOption;
       'api::unit.unit': ApiUnitUnit;
