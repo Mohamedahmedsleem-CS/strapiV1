@@ -1,0 +1,27 @@
+{
+  "collectionName": "components_offer_shrt_alerd",
+  "info": {
+    "displayName": "شرط العرض"
+  },
+  "options": {},
+  "attributes": {
+    "conditionType": {
+      "type": "enumeration",
+      "enum": [
+        "كمية من منتج",
+        "كمية من قسم",
+        "إجمالي السلة"
+      ]
+    },
+    "minQuantity": {
+      "type": "decimal"
+    },
+    "minCartAmount": {
+      "type": "decimal"
+    },
+    "note": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

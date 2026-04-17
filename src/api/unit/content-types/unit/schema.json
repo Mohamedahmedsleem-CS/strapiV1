@@ -27,6 +27,12 @@
         "volume",
         "piece"
       ]
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offer.offer",
+      "mappedBy": "unit"
     }
   }
 }

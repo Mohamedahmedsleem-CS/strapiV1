@@ -1,0 +1,109 @@
+{
+  "kind": "collectionType",
+  "collectionName": "offers",
+  "info": {
+    "singularName": "offer",
+    "pluralName": "offers",
+    "displayName": "offer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "badgeText": {
+      "type": "string"
+    },
+    "offerType": {
+      "type": "enumeration",
+      "enum": [
+        "خصم",
+        "هدية",
+        "كمية بسعر خاص",
+        "باقة"
+      ]
+    },
+    "editorSummary": {
+      "type": "text"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "startAt": {
+      "type": "datetime"
+    },
+    "endAt": {
+      "type": "datetime"
+    },
+    "priority": {
+      "type": "integer",
+      "default": 1
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 1
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "offers"
+    },
+    "categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::category.category",
+      "mappedBy": "offers"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product.product",
+      "inversedBy": "giftProduct"
+    },
+    "unit": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::unit.unit",
+      "inversedBy": "offers"
+    },
+    "quantity_option": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::quantity-option.quantity-option",
+      "inversedBy": "offers"
+    },
+    "conditions": {
+      "type": "component",
+      "component": "offer.shrt-alerd",
+      "repeatable": true
+    },
+    "rewards": {
+      "type": "component",
+      "component": "offer.mkafat-alerd",
+      "repeatable": true
+    }
+  }
+}

@@ -437,12 +437,69 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    offers: Schema.Attribute.Relation<'manyToMany', 'api::offer.offer'>;
     order: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     showInHome: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     showInNavbar: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
+  collectionName: 'offers';
+  info: {
+    displayName: 'offer';
+    pluralName: 'offers';
+    singularName: 'offer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    badgeText: Schema.Attribute.String;
+    categories: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::category.category'
+    >;
+    conditions: Schema.Attribute.Component<'offer.shrt-alerd', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Text;
+    editorSummary: Schema.Attribute.Text;
+    endAt: Schema.Attribute.DateTime;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'> &
+      Schema.Attribute.Private;
+    offerType: Schema.Attribute.Enumeration<
+      [
+        '\u062E\u0635\u0645',
+        '\u0647\u062F\u064A\u0629',
+        '\u0643\u0645\u064A\u0629 \u0628\u0633\u0639\u0631 \u062E\u0627\u0635',
+        '\u0628\u0627\u0642\u0629',
+      ]
+    >;
+    priority: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    product: Schema.Attribute.Relation<'manyToOne', 'api::product.product'>;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    quantity_option: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::quantity-option.quantity-option'
+    >;
+    rewards: Schema.Attribute.Component<'offer.mkafat-alerd', true>;
+    slug: Schema.Attribute.UID<'title'>;
+    sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    startAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    unit: Schema.Attribute.Relation<'manyToOne', 'api::unit.unit'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -474,6 +531,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
+    giftProduct: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     instantDelivery: Schema.Attribute.Boolean;
     isBestSeller: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     isWeighed: Schema.Attribute.Boolean;
@@ -483,6 +541,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'api::product.product'
     > &
       Schema.Attribute.Private;
+    offers: Schema.Attribute.Relation<'manyToMany', 'api::offer.offer'>;
     originalPrice: Schema.Attribute.Decimal;
     price: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
@@ -527,6 +586,7 @@ export interface ApiQuantityOptionQuantityOption
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
+    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     price_modifier: Schema.Attribute.Decimal;
     publishedAt: Schema.Attribute.DateTime;
     unit: Schema.Attribute.Relation<'oneToOne', 'api::unit.unit'>;
@@ -555,6 +615,7 @@ export interface ApiUnitUnit extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::unit.unit'> &
       Schema.Attribute.Private;
     name: Schema.Attribute.String & Schema.Attribute.Required;
+    offers: Schema.Attribute.Relation<'oneToMany', 'api::offer.offer'>;
     publishedAt: Schema.Attribute.DateTime;
     shortName: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<['weight', 'volume', 'piece']> &
@@ -1076,6 +1137,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
+      'api::offer.offer': ApiOfferOffer;
       'api::product.product': ApiProductProduct;
       'api::quantity-option.quantity-option': ApiQuantityOptionQuantityOption;
       'api::unit.unit': ApiUnitUnit;

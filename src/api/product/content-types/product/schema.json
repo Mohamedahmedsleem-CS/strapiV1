@@ -90,6 +90,18 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "products"
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::offer.offer",
+      "mappedBy": "products"
+    },
+    "giftProduct": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offer.offer",
+      "mappedBy": "product"
     }
   }
 }

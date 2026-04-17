@@ -25,6 +25,12 @@
     },
     "name": {
       "type": "string"
+    },
+    "offers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::offer.offer",
+      "mappedBy": "quantity_option"
     }
   }
 }

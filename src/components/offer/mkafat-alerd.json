@@ -1,0 +1,35 @@
+{
+  "collectionName": "components_offer_mkafat_alerd",
+  "info": {
+    "displayName": "مكافأة العرض"
+  },
+  "options": {},
+  "attributes": {
+    "rewardType": {
+      "type": "enumeration",
+      "enum": [
+        "خصم نسبة",
+        "سعر ثابت لكمية",
+        "منتج هدية",
+        "كمية هدية",
+        "سعر باقة"
+      ]
+    },
+    "discountPercent": {
+      "type": "decimal"
+    },
+    "fixedPrice": {
+      "type": "decimal"
+    },
+    "giftQuantity": {
+      "type": "decimal"
+    },
+    "label": {
+      "type": "text"
+    },
+    "note": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}
