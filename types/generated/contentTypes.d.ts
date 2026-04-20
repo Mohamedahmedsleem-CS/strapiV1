@@ -473,6 +473,8 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Text;
     editorSummary: Schema.Attribute.Text;
     endAt: Schema.Attribute.DateTime;
+    exclusiveScope: Schema.Attribute.Enumeration<['same_group', 'all_groups']> &
+      Schema.Attribute.DefaultTo<'same_group'>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -497,6 +499,14 @@ export interface ApiOfferOffer extends Struct.CollectionTypeSchema {
     rewards: Schema.Attribute.Component<'offer.mkafat-alerd', true>;
     slug: Schema.Attribute.UID<'title'>;
     sortOrder: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    stackingGroup: Schema.Attribute.Enumeration<
+      ['pricing', 'gift', 'bundle', 'general']
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'general'>;
+    stackingMode: Schema.Attribute.Enumeration<['allow_stack', 'exclusive']> &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'allow_stack'>;
     startAt: Schema.Attribute.DateTime;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     unit: Schema.Attribute.Relation<'manyToOne', 'api::unit.unit'>;

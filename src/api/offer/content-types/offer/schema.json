@@ -104,6 +104,34 @@
       "type": "component",
       "component": "offer.mkafat-alerd",
       "repeatable": true
+    },
+    "stackingMode": {
+      "type": "enumeration",
+      "required": true,
+      "default": "allow_stack",
+      "enum": [
+        "allow_stack",
+        "exclusive"
+      ]
+    },
+    "stackingGroup": {
+      "type": "enumeration",
+      "required": true,
+      "default": "general",
+      "enum": [
+        "pricing",
+        "gift",
+        "bundle",
+        "general"
+      ]
+    },
+    "exclusiveScope": {
+      "type": "enumeration",
+      "default": "same_group",
+      "enum": [
+        "same_group",
+        "all_groups"
+      ]
     }
   }
 }
